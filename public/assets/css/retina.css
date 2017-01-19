@@ -1,0 +1,59 @@
+/* retina.less
+// A helper mixin for applying high-resolution background images (http://www.retinajs.com)
+*/
+
+
+@highdpi: ~"(-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-resolution: 1.5dppx)";
+
+.at2x(@path, @w: auto, @h: auto) {
+  background-image: url(@path);
+  @at2x_path: ~`@{path}.replace(/\.\w+$/, function(match) { return "@2x" + match; })`;
+
+  @media @highdpi {
+    background-image: url("@{at2x_path}");
+    background-size: @w @h;
+  }
+}
+
+img {
+	max-width: 100%;
+}
+
+.main-slider .item,
+.single-slider .item
+.item-bg {
+	@include at2x( '../images/image', 'jpg', 900px, 438px );
+	max-width: 900px;
+	max-height: 438px;
+}
+
+.post-slider .featured-image {
+	@include at2x( '../images/image', 'jpg', 373px, 220px );
+	max-width: 820px;
+	max-height: 500px;
+}
+
+.client-image {
+	@include at2x( '../images/image', 'jpg', 51px, 51px );
+	max-width: 51px;
+	max-height: 51px;
+}
+
+.client-slider .item {
+	@include at2x( '../images/image', 'jpg', 215px, 108px);
+	max-width: 820px;
+	max-height: 500px;
+}
+
+.post-image,
+.single-slide .item {
+	@include at2x( '../images/image', 'jpg', 410px, 250px);
+	max-width: 820px;
+	max-height: 500px;
+}
+
+.top-image {
+	@include at2x( '../images/image', 'jpg' 390px, 230px);
+	max-width: 820px;
+	max-height: 500px;
+}
