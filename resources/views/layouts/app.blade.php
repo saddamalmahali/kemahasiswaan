@@ -23,6 +23,7 @@
     </script>
     <!-- Scripts -->
     <script src="{{url('/js/app.js')}}"></script>
+    <script src="{{url('js/chartjs/Chart.bundle.js')}}"></script>
 </head>
 <body>
     <div id="app">
