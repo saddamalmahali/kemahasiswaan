@@ -106,7 +106,7 @@ class ClientController extends Controller
 
     public function list_kegiatan()
     {
-        $post = new Post();
+        $post = Post::where('kategori', '=', auth('client')->user()->kategori);
         $post = $post->paginate('6');
         return view('client.list_kegiatan', ['data_kegiatan'=>$post]);
     }
