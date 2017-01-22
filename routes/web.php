@@ -57,4 +57,8 @@ Route::group(['middleware' => ['client']], function () {
 	Route::get('/posting_kegiatan', 'ClientController@posting_kegiatan');
     Route::post('/client/tambah_kegiatan', 'ClientController@tambah_kegiatan');
     Route::get('/list_kegiatan', 'ClientController@list_kegiatan');
+    Route::get('/client/edit_kegiatan/{id}', 'ClientController@edit_kegiatan');
+    Route::post('/client/simpan_kegiatan', 'ClientController@simpan_kegiatan');
+    Route::post('/client/simpan_kegiatan', 'ClientController@simpan_kegiatan');
+    Route::post('/client/hapus_kegiatan', 'ClientController@hapus_kegiatan');
 });

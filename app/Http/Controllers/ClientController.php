@@ -110,4 +110,49 @@ class ClientController extends Controller
         $post = $post->paginate('6');
         return view('client.list_kegiatan', ['data_kegiatan'=>$post]);
     }
+
+    public function edit_kegiatan($id)
+    {
+        $post = Post::find($id);
+
+        return view('client.edit_kegiatan', ['post'=>$post]);
+    }
+
+    public function simpan_kegiatan(Request $request)
+    {
+        $this->validate($request, [
+            'title'=>'required',
+            'status'=>'required'
+        ]);
+
+        $post = Post::find($request->input('id'));
+        $post->author_id = auth('client')->user()->id;
+        $post->title = $request->input('title');
+        $post->kategori = $request->input('kategori');
+        $post->active = $request->input('active');
+        $post->body = $request->input('note');
+
+        if ($request->file('file_header') != null) {
+            $destinationPath = 'img'; // upload path
+            $extension = $request->file('file_header')->getClientOriginalExtension(); // getting image extension
+            $fileName = rand(11111,99999).'.'.$extension; // renameing image
+            $request->file('file_header')->move($destinationPath, $fileName); // uploading file to given path
+            $post->gambar_header = $fileName;
+        }
+       
+        $post->active = $request->input('status');
+
+        if($post->save()){
+            $request->session()->flash('sukses', 'Berhasil Menyimpan Data!');
+            return redirect('/list_kegiatan');
+        }
+    }
+
+    public function hapus_kegiatan(Request $request)
+    {
+        $kegiatan = Post::find($request->input('id'));
+        if($kegiatan->delete()){
+            return json_encode('sukses');
+        }
+    }
 }
