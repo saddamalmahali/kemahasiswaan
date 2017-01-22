@@ -33,35 +33,29 @@
                         </div>
                         <div class="col-md-4">
                             
-                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <div class="form-group{{ $errors->has('jenis_organisasi') ? ' has-error' : '' }}">
                                 <label for="jenis_organisasi">Jenis Organisasi</label>                                
                                 <select name="jenis_organisasi" class="form-control" >
                                     <option value="" disadbled selected>Pilih Jenis Organisasi</option>
+                                    <option value="ukm">UKM</option>
+                                    <option value="hima">HIMA</option>
                                 </select>
-                                @if ($errors->has('email'))
+                                @if ($errors->has('jenis_organisasi'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('jenis_organisasi') }}</strong>
                                     </span>
                                 @endif
                             </div>
-                            <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                                <label for="kode_user">Username</label>
-                                <input type="text" name="username" class="form-control" placeholder="Username">
-                                @if ($errors->has('username'))
+                            <div class="form-group{{ $errors->has('nama_pimpinan') ? ' has-error' : '' }}">
+                                <label for="nama_pimpinan">Nama Pimpinan</label>
+                                <input type="number" name="nama_pimpinan" class="form-control" placeholder="Masukan Nama Pimpinan">
+                                @if ($errors->has('nama_pimpinan'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('username') }}</strong>
+                                        <strong>{{ $errors->first('nama_pimpinan') }}</strong>
                                     </span>
                                 @endif
                             </div>
-                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label for="kode_user">Password</label>
-                                <input type="password" name="password" class="form-control" placeholder="Minimal 6 Karakter">
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+                            
                         </div>
                         <div class="col-md-4{{ $errors->has('foto') ? ' has-error' : '' }}" >
                             <label for="foto">Foto Profil</label>
