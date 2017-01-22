@@ -39,7 +39,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ url('/home') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
@@ -53,18 +53,17 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ url('/login') }}">Login</a></li>
-                            <li><a href="{{ url('/register') }}">Register</a></li>
-                        @else
+                        
+                        @if(Auth::guard('web')->check())
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    Preferences <span class="caret"></span>
+                                    Master Data <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="{{url('/index_user_hima')}}">User HIMA</a></li>
-                                    <li><a>User UKM</a></li>
+                                    <li><a href="{{url('/index_user_ukm')}}">User UKM</a></li>
+                                    <li><a href="{{url('/index_organisasi')}}">Organisasi</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">

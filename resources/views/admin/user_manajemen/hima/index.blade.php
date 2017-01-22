@@ -40,7 +40,7 @@
                                     <td align="center">{{$user->email}}</td>
                                     <td align="center">
                                         <a href="{{url('/update_user_hima').'/'.$user->id}}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-                                        <a href="" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
+                                        <a class="btn btn-danger btn-xs btn-hapus-user" id="{{$user->id}}"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 <?php $i++; ?>
@@ -56,4 +56,32 @@
             </div>
         </div>
     </div>    
+    <script>
+        $(document).ready(function(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $(document).on('click', '.btn-hapus-user', function(e){
+                e.preventDefault();
+                if(confirm('Apakah yakin akan menghapus data?')){
+                    var id_user = $(this).attr('id');
+
+                    $.ajax({
+                        url : '/hapus_user_hima',
+                        type : 'post',
+                        data : {id : id_user },
+                        dataType : 'json',
+                        success : function(data){
+                            if(data == 'sukses'){
+                                document.location.reload(false);
+                            }
+                        }
+                    }); 
+                }
+                console.log('Tombol hapus di klik...');
+            });
+        });
+    </script>
 @endsection

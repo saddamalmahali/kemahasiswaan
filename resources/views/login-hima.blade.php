@@ -8,6 +8,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="../../favicon.ico">
 
     <title>Signin Template for Bootstrap</title>
@@ -37,25 +38,28 @@
 
     <div class="container">
 
-      <form class="form-signin">
+      <form class="form-signin" action="{{url('/login_hima')}}" method="POST">
+        {{ csrf_field() }}
         <div align="center"><img src="{{url('img/logo.png')}}" width="100" height="100"></div>
-        <h2 class="form-signin-heading" align="center"><b>Alumni </b><p><small>Sistem Informasi Kemahasiswaan</small></p> </h2> <br />
-        <div class="form-group">
+        <h2 class="form-signin-heading" align="center"><b>Kemahasiswaan </b><p><small>Sistem Informasi Kemahasiswaan</small></p> </h2> <br />
+        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
           <label for="inputEmail" class="sr-only">Email address</label>
-          <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+          <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required autofocus>
+          @if ($errors->has('email'))
+              <span class="help-block">
+                  <strong>{{ $errors->first('email') }}</strong>
+              </span>
+          @endif
         </div>
         
-        <div class="form-group">
+        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
           <label for="inputPassword" class="sr-only">Password</label>
-          <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        </div>
-        <div class="form-group">
-          <label for="inputPassword" class="sr-only">Type Login</label>
-          <select name="login_type" class="form-control">
-            <option value="" disabled selected>Pilih Tipe Login</option>
-            <option value="hima">Hima</option>
-            <option value="ukm">UKM</option>
-          </select>
+          <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+          @if ($errors->has('password'))
+              <span class="help-block">
+                  <strong>{{ $errors->first('password') }}</strong>
+              </span>
+          @endif
         </div>
         <div class="checkbox">
           <label>

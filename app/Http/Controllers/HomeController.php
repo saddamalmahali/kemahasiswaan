@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Post;
 class HomeController extends Controller
 {
     /**
@@ -23,8 +23,18 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function masuk_hima()
+    public function index_home()
     {
-        return view('login-hima');
+        $post = Post::limit('2')->get();
+        return view('welcome', ['data_post'=>$post]);
     }
+
+    public function view_post($id)
+    {
+        $post = Post::find($id);
+        return view('detail_post', ['post'=>$post]);
+    }
+    
+
+    
 }
