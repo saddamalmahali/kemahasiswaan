@@ -56,4 +56,5 @@ Route::group(['middleware' => ['client']], function () {
     Route::get('/client/index','ClientController@index_client');
 	Route::get('/posting_kegiatan', 'ClientController@posting_kegiatan');
     Route::post('/client/tambah_kegiatan', 'ClientController@tambah_kegiatan');
+    Route::get('/list_kegiatan', 'ClientController@list_kegiatan');
 });

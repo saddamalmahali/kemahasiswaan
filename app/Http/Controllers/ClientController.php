@@ -103,4 +103,11 @@ class ClientController extends Controller
             return redirect('/client/index');
         }
     }
+
+    public function list_kegiatan()
+    {
+        $post = new Post();
+        $post = $post->paginate('6');
+        return view('client.list_kegiatan', ['data_kegiatan'=>$post]);
+    }
 }

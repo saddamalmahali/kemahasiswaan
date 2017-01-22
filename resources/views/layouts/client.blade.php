@@ -65,11 +65,8 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="{{url('/posting_kegiatan')}}">Posting Kegiatan</a></li>
-                                    <li><a href="#">List Kegiatan</a></li>
+                                    <li><a href="{{url('/list_kegiatan')}}">List Kegiatan</a></li>
                                 </ul>
-                            </li>
-                            <li>
-                                <a href="#" >Galeri</a>
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

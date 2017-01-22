@@ -46,6 +46,8 @@
                                         
                                     </tbody>
                                 </table>
+
+                                <div style="text-align:center;">{{$data_organisasi->links()}}</div>
                             </div>
                         </div>
                     </div>
