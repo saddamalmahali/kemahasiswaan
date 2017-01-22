@@ -45,6 +45,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/index_organisasi', 'AdminController@index_organisasi');
     Route::get('/admin/organisasi/tambah', 'AdminController@tambah_organisasi');
     Route::post('/admin/organisasi/simpan', 'AdminController@simpan_organisasi');
+    Route::get('/admin/organisasi/edit/{id}', 'AdminController@edit_organisasi');
+    Route::post('/admin/organisasi/simpan_edit', 'AdminController@simpan_edit_organisasi');
+    Route::post('/admin/organisasi/hapus', 'AdminController@hapus_organisasi');
 });
 
 //Akses Grup Untuk Client

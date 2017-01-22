@@ -312,4 +312,51 @@ class AdminController extends Controller
             return redirect('/index_organisasi');
         }
     }
+
+    public function edit_organisasi($id)
+    {
+        $organisasi = Organisasi::find($id);
+
+        return view('admin.organisasi.edit', ['organisasi'=>$organisasi]);
+    }
+    public function simpan_edit_organisasi(Request $request)
+    {
+        $this->validate($request, [
+            'nama'=>'required',
+            'tahun_berdiri'=>'required',
+            'jenis_organisasi'=>'required',
+            'nama_pimpinan'=>'required',
+            'deskripsi'=>'required'
+        ]);
+
+        $organisasi = Organisasi::find($request->input('id'));
+        $organisasi->nama = $request->input('nama');
+        $organisasi->tahun_berdiri = $request->input('tahun_berdiri');
+        $organisasi->jenis_organisasi = $request->input('jenis_organisasi');
+        $organisasi->nama_pimpinan = $request->input('nama_pimpinan');
+        $organisasi->deskripsi = $request->input('deskripsi');
+
+        if ($request->file('foto') != null) {
+            $destinationPath = 'img'; // upload path
+            $extension = $request->file('foto')->getClientOriginalExtension(); // getting image extension
+            $fileName = rand(11111,99999).'.'.$extension; // renameing image
+            $request->file('foto')->move($destinationPath, $fileName); // uploading file to given path
+            $organisasi->logo = $fileName;
+        }
+
+        if($organisasi->save())
+        {
+            
+            return redirect('/index_organisasi');
+        }
+    }
+    
+    public function hapus_organisasi(Request $request)
+    {
+        $organisasi = Organisasi::find($request->input('id'));
+
+        if($organisasi->delete()){
+            return json_encode('sukses');
+        }
+    }
 }

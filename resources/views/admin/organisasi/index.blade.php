@@ -28,11 +28,14 @@
                                         <?php $i = 0; ?>
                                         @forelse ($data_organisasi as $organisasi)
                                             <tr>
-                                                <td>{{$i+1}}</td>
+                                                <td align="center">{{$i+1}}</td>
                                                 <td>{{$organisasi->nama}}</td>
                                                 <td>{{$organisasi->tahun_berdiri}}</td>
                                                 <td>{{$organisasi->nama_pimpinan}}</td>
-                                                <td></td>
+                                                <td align="center">
+                                                    <a href="{{url('/admin/organisasi/edit').'/'.$organisasi->id}}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                                                    <a id="{{$organisasi->id}}" class="btn btn-danger btn-xs btn-hapus-organisasi" ><i class="fa fa-trash"></i></a>
+                                                </td>
                                             </tr>    
                                             <?php $i++; ?>
                                         @empty
@@ -50,4 +53,31 @@
             </div>
         </div>
     </div>
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $(document).ready(function(){
+            $(document).on('click', '.btn-hapus-organisasi', function(e){
+                e.preventDefault();
+                if(confirm('Apakah Yakin Akan menghapus Data?')){
+                    var id = $(this).attr('id');
+                    $.ajax({
+                        url : '/admin/organisasi/hapus',
+                        type : 'post',
+                        data : {id : id},
+                        dataType : 'json',
+                        success : function(data){
+                            if(data == 'sukses'){
+                                document.location.reload(false);
+                            }
+                        }
+                    });
+
+                }
+            });
+        }); 
+    </script>
 @endsection
