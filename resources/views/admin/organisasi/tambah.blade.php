@@ -29,38 +29,15 @@
                                     </span>
                                 @endif
                             </div>
-                            <div class="form-group{{ $errors->has('nama') ? ' has-error' : '' }}">
-                                <label for="kode_user">Nama User</label>
-                                <input type="text" name="nama" class="form-control" placeholder="Contoh : Edwin">
-                                @if ($errors->has('nama'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('nama') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                            <div class="form-group{{ $errors->has('bagian') ? ' has-error' : '' }}">
-                                <label for="kode_user">Bagian</label>
-                                <select name="bagian" class="form-control">
-                                    <option value="" disabled selected>Pilih Bagian</option>
-                                    <option value="himatif">HIMATIF</option>
-                                    <option value="himasip">HIMASIP</option>
-                                    <option value="himti">HIMTI</option>
-                                </select>
-                                @if ($errors->has('bagian'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('bagian') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+                            
                         </div>
                         <div class="col-md-4">
                             
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <label for="kode_user">Email</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon">@</div>
-                                    <input type="text" name="email" class="form-control" placeholder="user@sttgarut.ac.id">
-                                </div>
+                                <label for="jenis_organisasi">Jenis Organisasi</label>                                
+                                <select name="jenis_organisasi" class="form-control" >
+                                    <option value="" disadbled selected>Pilih Jenis Organisasi</option>
+                                </select>
                                 @if ($errors->has('email'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>

@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
-class DatabaseSeeder extends Seeder
+
+class AdminSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,7 +14,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-        // $this->call(UsersTableSeeder::class);
-        $this->call("AdminSeeder");
+        $user = new User();
+        $user->name = "Admin";
+        $user->email = "admin@sttgarut.ac.id";
+        $user->password = bcrypt("123456");
+        $user->save();
     }
 }
