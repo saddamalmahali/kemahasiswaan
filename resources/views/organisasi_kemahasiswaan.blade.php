@@ -33,12 +33,10 @@
                                                 <td>:</td>
                                                 <td>{{$organisasi->tahun_berdiri}}</td>
                                             </tr>
-                                            <tr>
-                                                <td>Nama Organisasi</td>
-                                                <td>:</td>
-                                                <td>{{$organisasi->deskripsi}}</td>
-                                            </tr>
+                                            
                                         </table>
+                                        <br />
+                                        <p>{{$organisasi->deskripsi}}</p>
                                     </p>
                                 </div><!-- /.item -->
                             </div><!-- /.col-sm-4 -->
