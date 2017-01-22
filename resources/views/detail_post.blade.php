@@ -50,26 +50,6 @@
                         </article><!-- /.single-post-text -->
 
                         
-
-
-                        <!-- Leave Comment -->
-
-                        <div id="leave-comment" class="clearfix leave-comment">
-                            <div class="wrapper">
-                                <h3 class="title">Leave a Comment</h3>
-                                <div id="respond">
-                                    <form action="#" method="post" id="commentform">
-                                        <input id="author" class="respond-author" name="author" type="text" placeholder="Your Name" value="" required>
-                                        <input id="email" class="respond-email" name="email" type="email" placeholder="Your Email" value="" required>
-                                        <input id="url" class="respond-url" name="url" type="url" placeholder="URL" value="">
-                                        <textarea id="comment" class="respond-comment large" name="comment" placeholder="Comment" rows="6" required></textarea>
-                                        <div class="default">
-                                            <button name="submit" class="btn btn-bg" type="submit" id="submit">Submit</button>
-                                        </div><!-- /.default -->
-                                    </form><!-- /#commentform -->
-                                </div><!-- /#respond -->
-                            </div><!-- /#leave-comment -->
-                        </div><!-- /.wrapper -->
                     </div><!-- /#leave-comment -->
                     <!-- Leave Comment End -->
                 </div><!-- /.post-dtails -->

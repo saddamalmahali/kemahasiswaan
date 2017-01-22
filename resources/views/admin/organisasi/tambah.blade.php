@@ -7,7 +7,7 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Form Tambah Organisasi</h3>
                 </div>
-                <form action="{{url('/tambah_organisasi')}}" method="post" enctype="multipart/form-data" style="padding :0; margin:0;">
+                <form action="{{url('/admin/organisasi/simpan')}}" method="post" enctype="multipart/form-data" style="padding :0; margin:0;">
                     <div class="panel-body">
                         {{ csrf_field() }}
                         <div class="col-md-4">
@@ -29,10 +29,6 @@
                                     </span>
                                 @endif
                             </div>
-                            
-                        </div>
-                        <div class="col-md-4">
-                            
                             <div class="form-group{{ $errors->has('jenis_organisasi') ? ' has-error' : '' }}">
                                 <label for="jenis_organisasi">Jenis Organisasi</label>                                
                                 <select name="jenis_organisasi" class="form-control" >
@@ -46,16 +42,28 @@
                                     </span>
                                 @endif
                             </div>
+                        </div>
+                        <div class="col-md-4">
+                            
+                            
                             <div class="form-group{{ $errors->has('nama_pimpinan') ? ' has-error' : '' }}">
                                 <label for="nama_pimpinan">Nama Pimpinan</label>
-                                <input type="number" name="nama_pimpinan" class="form-control" placeholder="Masukan Nama Pimpinan">
+                                <input type="text" name="nama_pimpinan" class="form-control" placeholder="Masukan Nama Pimpinan">
                                 @if ($errors->has('nama_pimpinan'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('nama_pimpinan') }}</strong>
                                     </span>
                                 @endif
                             </div>
-                            
+                            <div class="form-group{{ $errors->has('deskripsi') ? ' has-error' : '' }}">
+                                <label for="deskripsi">Keterangan</label>
+                                <textarea name="deskripsi" class="form-control" rows="4"></textarea>
+                                @if ($errors->has('deskripsi'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('deskripsi') }}</strong>
+                                    </span>
+                                @endif
+                            </div>                            
                         </div>
                         <div class="col-md-4{{ $errors->has('foto') ? ' has-error' : '' }}" >
                             <label for="foto">Foto Profil</label>

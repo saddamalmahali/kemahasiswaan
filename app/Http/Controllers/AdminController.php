@@ -279,4 +279,37 @@ class AdminController extends Controller
     {
         return view('admin.organisasi.tambah');
     }
+
+    public function simpan_organisasi(Request $request)
+    {
+        $this->validate($request, [
+            'nama'=>'required',
+            'tahun_berdiri'=>'required',
+            'jenis_organisasi'=>'required',
+            'nama_pimpinan'=>'required',
+            'deskripsi'=>'required',
+            'foto'=>'required'
+        ]);
+
+        $organisasi = new Organisasi();
+        $organisasi->nama = $request->input('nama');
+        $organisasi->tahun_berdiri = $request->input('tahun_berdiri');
+        $organisasi->jenis_organisasi = $request->input('jenis_organisasi');
+        $organisasi->nama_pimpinan = $request->input('nama_pimpinan');
+        $organisasi->deskripsi = $request->input('deskripsi');
+
+        if ($request->file('foto') != null) {
+            $destinationPath = 'img'; // upload path
+            $extension = $request->file('foto')->getClientOriginalExtension(); // getting image extension
+            $fileName = rand(11111,99999).'.'.$extension; // renameing image
+            $request->file('foto')->move($destinationPath, $fileName); // uploading file to given path
+            $organisasi->logo = $fileName;
+        }
+
+        if($organisasi->save())
+        {
+            
+            return redirect('/index_organisasi');
+        }
+    }
 }

@@ -16,6 +16,8 @@ Route::get('/', 'HomeController@index_home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+Route::get('/publikasi', 'HomeController@index_publikasi');
+Route::get('/organisasi_kemahasiswaan', 'HomeController@organisasi_kemahasiswaan');
 Route::get('/post/{id}', 'HomeController@view_post');
 Route::get('/login_hima', 'ClientController@masuk_hima');
 Route::post('/login_hima', 'ClientController@login_client');
@@ -42,6 +44,7 @@ Route::group(['middleware' => ['web']], function () {
     //Menu Organisasi
     Route::get('/index_organisasi', 'AdminController@index_organisasi');
     Route::get('/admin/organisasi/tambah', 'AdminController@tambah_organisasi');
+    Route::post('/admin/organisasi/simpan', 'AdminController@simpan_organisasi');
 });
 
 //Akses Grup Untuk Client

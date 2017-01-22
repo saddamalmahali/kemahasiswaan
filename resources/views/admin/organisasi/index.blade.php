@@ -34,6 +34,7 @@
                                                 <td>{{$organisasi->nama_pimpinan}}</td>
                                                 <td></td>
                                             </tr>    
+                                            <?php $i++; ?>
                                         @empty
                                             <tr>
                                                 <td colspan="5" align="center">Tidak Ada Data</td>

@@ -15,7 +15,7 @@
                 <ul>
                     <li class="{{url()->full() == url('/') ? 'active' : ''}}"><a href="{{url('/')}}">Home</a></li>
                     
-                    <li> <a href="shortcode.html">Organisasi Kemahasiswaan</a></li>
+                    <li> <a href="{{url('organisasi_kemahasiswaan')}}">Organisasi Kemahasiswaan</a></li>
                     <li><a href="contact.html">Contact</a></li>
 
                     <li><div class="default"></div></li>
