@@ -49,6 +49,7 @@
         <center><h4>Data Kosong</h4></center>
     @endforelse
     
+    <div style="text-align:center">{{$data_post->links}}</div>
 
     <!-- Post section End -->
 </div><!-- /.col-sm-9 -->
