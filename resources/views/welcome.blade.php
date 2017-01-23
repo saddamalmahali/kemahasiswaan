@@ -131,7 +131,7 @@
 
                 <div class="col-sm-4">
                     <div class="widget widget_recent_post">
-                        <h3 class="widget-title"><span></span>Recent Posts</h3>
+                        <h3 class="widget-title"><span></span>Recent Kegiatan</h3>
                         @forelse ($recent_post as $post)
                             <div class="recent-post">
                                 <a class="recent-title" href="{{url('/post').'/'.$post->id}}">{{$post->title}}</a>
