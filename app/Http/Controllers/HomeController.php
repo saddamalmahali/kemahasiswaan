@@ -52,7 +52,9 @@ class HomeController extends Controller
     public function view_post($id)
     {
         $post = Post::find($id);
-        return view('detail_post', ['post'=>$post]);
+        $post_recent = Post::orderBy('created_at')->limit(3)->get();
+        $orgnisasi_recent = Organisasi::orderBy('created_at')->limit(5)->get();
+        return view('detail_post', ['post'=>$post, 'recent_post'=>$post_recent, 'recent_organisasi'=>$orgnisasi_recent]);
     }
 
     public function index_publikasi()

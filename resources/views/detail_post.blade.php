@@ -61,51 +61,32 @@
             <div class="footer-section">
                 <div class="col-sm-4">
                     <div class="widget widget_twitter_post">
-                        <h3 class="widget-title"><span></span>Latest Tweet</h3>
-                        <p class="tweet">We just Going to publish our own CMS. We hope that this will change your life. <a href="#">http://ow.ly/tCRDE</a></p>
-                        <p class="tweet">We are working for build some necessary WP plugin which are really effective for SEO and helps you to rank into search engine. <a href="#">http://ow.ly/tCRDE</a></p>
+                        <h3 class="widget-title"><span></span>Latest Organisasi</h3>
+                        @forelse ($recent_organisasi as $organisasi)
+                            <p class="tweet"><b>{{$organisasi->nama}}</b>-{{$organisasi->deskripsi}}</p>    
+                        @empty
+                            
+                        @endforelse
+                        
                     </div><!-- /.widget -->
                 </div><!-- /.col-sm-4 -->
 
                 <div class="col-sm-4">
                     <div class="widget widget_recent_post">
-                        <h3 class="widget-title"><span></span>Recent Posts</h3>
-                        <div class="recent-post">
-                            <a class="recent-title" href="#">Type Code With Sunglass </a>
-                            <p class="post-description">We like to do Coding after put sunglass. We know that much light of laptop can harm us.</p>
-                        </div><!-- /.recent-post -->
-                        <div class="recent-post">
-                            <a class="recent-title" href="#">Sunglass Save Us Outside Also </a>
-                            <p class="post-description">We take our sunglass when we go out. We have to take care of our eye so that sunglass is very necessary for us.</p>
-                        </div><!-- /.recent-post -->			
+                        <h3 class="widget-title"><span></span>Recent Kegiatan</h3>
+                        @forelse ($recent_post as $post)
+                            <div class="recent-post">
+                                <a class="recent-title" href="{{url('/post').'/'.$post->id}}">{{$post->title}}</a>
+                                <p class="post-description">{!! substr($post->body, 0, 800) !!}</p>
+                            </div><!-- /.recent-post -->	
+                        @empty
+                            
+                        @endforelse
+                        	
                     </div><!-- /.widget -->
                 </div><!-- /.col-sm-4 -->
 
-                <div class="col-sm-4">
-                    <div class="widget widget_dribble">
-                        <h3 class="widget-title"><span></span>Dribble Shots</h3>
-                        <div class="dribble-shots widget_img">
-                            <a href="#"><img src="images/dribble/shot1.jpg" data-at2x="images/dribble/shot1@2x.jpg" alt="dribble-image">
-                                <span></span>
-                            </a>
-                            <a href="#"><img src="images/dribble/shot2.jpg" data-at2x="images/dribble/shot2@2x.jpg" alt="dribble-image">
-                                <span></span>
-                            </a>
-                            <a href="#"><img src="images/dribble/shot3.jpg" data-at2x="images/dribble/shot3@2x.jpg" alt="dribble-image">
-                                <span></span>
-                            </a>
-                            <a href="#"><img src="images/dribble/shot4.jpg" data-at2x="images/dribble/shot4@2x.jpg" alt="dribble-image">
-                                <span></span>
-                            </a>
-                            <a href="#"><img src="images/dribble/shot5.jpg" data-at2x="images/dribble/shot5@2x.jpg" alt="dribble-image">
-                                <span></span>
-                            </a>
-                            <a href="#"><img src="images/dribble/shot6.jpg" data-at2x="images/dribble/shot6@2x.jpg" alt="dribble-image">
-                                <span></span>
-                            </a>
-                        </div><!-- /.shots -->
-                    </div><!-- /.widget -->
-                </div><!-- /.col-sm-4 -->
+                
             </div><!-- /.footer-section -->
         </footer><!-- /#footer-seection -->
     </div><!-- /.col-sm-9 -->

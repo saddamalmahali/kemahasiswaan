@@ -17,7 +17,7 @@
                                 <h3 class="item-title"><a href="{{url('/publikasi')}}">Kegiatan</a></h3>
                             </div><!-- /.item-top -->
                             <p class="item-description">
-                                Setiap
+                                Memuat Informasi Kegiatan Setiap HIMA atau UKM di lingkungan Sekolah Tinggi Teknologi Garut
                             </p>
                         </div><!-- /.item -->
                     </div><!-- /.col-sm-4 -->
