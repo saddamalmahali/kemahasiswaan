@@ -32,26 +32,21 @@ class HomeController extends Controller
             'total_organisasi'=>$total_organisasi,
             'total_kegiatan'=>$total_kegiatan
         ];
-        $kegiatan_hima = "";
-
-        $postingan_himatif = Post::where('kategori', '=', 'himatif')->count();
-        $postingan_himasip = Post::where('kategori', '=', 'himasip')->count();
-        $postingan_himti = Post::where('kategori', '=', 'himti')->count();
-        $data_chart_hima = [
-            
-            'postingan_himatif'=>$postingan_himatif,
-            'postingan_himasip'=>$postingan_himasip,
-            'postingan_himti'=>$postingan_himti,
-        ];
         
-        $post_terakhir = Post::orderBy('created_at', 'desc')->limit(5);
-        return view('home', ['data'=>$data, 'post_terakhir'=>$post_terakhir]);
+
+        
+        
+        $post_terakhir = Post::orderBy('created_at', 'desc')->limit(5)->get();
+        $organisasi = Organisasi::orderBy('created_at', 'desc')->limit(5)->get();
+        return view('home', ['data'=>$data, 'post_terakhir'=>$post_terakhir, 'data_organisasi'=>$organisasi]);
     }
 
     public function index_home()
     {
+        $post_recent = Post::orderBy('created_at')->limit(3)->get();
+        $orgnisasi_recent = Organisasi::orderBy('created_at')->limit(5)->get();
         $post = Post::limit('2')->get();
-        return view('welcome', ['data_post'=>$post]);
+        return view('welcome', ['data_post'=>$post, 'recent_post'=>$post_recent, 'recent_organisasi'=>$orgnisasi_recent]);
     }
 
     public function view_post($id)
@@ -74,7 +69,15 @@ class HomeController extends Controller
         return view('organisasi_kemahasiswaan', ['data_organisasi'=>$organisasi]);
     }
     
-    
+    public function index_tentang()
+    {
+        return view('tentang');
+    }
+
+    public function kontak()
+    {
+        return view('kontak');
+    }
 
     
 }

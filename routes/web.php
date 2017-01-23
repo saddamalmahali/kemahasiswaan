@@ -17,6 +17,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 Route::get('/publikasi', 'HomeController@index_publikasi');
+Route::get('/tentang', 'HomeController@index_tentang');
+Route::get('/kontak', 'HomeController@kontak');
 Route::get('/organisasi_kemahasiswaan', 'HomeController@organisasi_kemahasiswaan');
 Route::get('/post/{id}', 'HomeController@view_post');
 Route::get('/login_hima', 'ClientController@masuk_hima');

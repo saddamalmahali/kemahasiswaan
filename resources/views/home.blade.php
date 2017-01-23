@@ -97,7 +97,7 @@
                     <div class="page-heading">  
                         <div class="row">
                             <div class="col-md-7">
-                                <center>5 Postingan Teratas</center>
+                                <center><h3>5 Postingan Teratas</h3></center>
                                 <table class="table table-hover">
                                     
                                     <tr>
@@ -114,12 +114,36 @@
                                             <td align="center"><span class="label label-primary">{{$post->kategori}}</span></td>
                                             <td align="center">{{$i+1}}</td>
                                         </tr>
+                                        <?php $i++; ?>
                                     @empty
                                         <tr>
                                             <td colspan="4" align="center">Tidak Ada Data</td>
                                         </tr>
                                     @endforelse
                                     
+                                </table>
+                            </div>
+                            <div class="col-md-5" >
+                                <center><h3>Organisasi Terakhir Ditambahkan</h3></center>
+                                <table class="table table-hover">
+                                    <tr>
+                                        <th style="width:10%; text-align:center;">No</th>
+                                        <th style="text-align:center;">Nama Organisasi</th>
+                                        <th style="text-align:center;">Jenis</th>                                                                                     
+                                    </tr>
+                                    <?php $i=0; ?>
+                                    @forelse ($data_organisasi as $organisasi)
+                                        <tr>
+                                            <td align="center">{{$i+1}}</td>
+                                            <td align="center">{{$organisasi->nama}}</td>
+                                            <td align="center"><span>{{$organisasi->jenis_organisasi}}</span></td>
+                                        </tr>
+                                        <?php $i++ ?>
+                                    @empty
+                                        <tr>
+                                            <td colspan="3">Tidak Ada Data</td>
+                                        </tr>
+                                    @endforelse
                                 </table>
                             </div>
                         </div>
