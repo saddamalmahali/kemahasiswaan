@@ -68,10 +68,6 @@ class ClientController extends Controller
 
     public function index_client()
     {
-        
-
-        
-        
         $post_terakhir = Post::where('kategori', '=', auth('client')->user()->bagian)->orderBy('created_at', 'desc')->limit(5)->get();
         $user = auth('client')->user();
         return view('client.dasboard', ['post_terakhir'=>$post_terakhir, 'user'=>$user]);

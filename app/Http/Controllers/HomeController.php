@@ -22,23 +22,27 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user_hima = UserManajemen::where('tipe', '=', 'hima')->count();
-        $user_ukm = UserManajemen::where('tipe', '=', 'ukm')->count();
-        $total_organisasi = Organisasi::count();
-        $total_kegiatan = Post::count();
-        $data = [
-            'total_ukm'=>$user_ukm,
-            'total_hima'=>$user_hima,
-            'total_organisasi'=>$total_organisasi,
-            'total_kegiatan'=>$total_kegiatan
-        ];
-        
+        if(auth()->guest()){
+            $user_hima = UserManajemen::where('tipe', '=', 'hima')->count();
+            $user_ukm = UserManajemen::where('tipe', '=', 'ukm')->count();
+            $total_organisasi = Organisasi::count();
+            $total_kegiatan = Post::count();
+            $data = [
+                'total_ukm'=>$user_ukm,
+                'total_hima'=>$user_hima,
+                'total_organisasi'=>$total_organisasi,
+                'total_kegiatan'=>$total_kegiatan
+            ];
 
-        
-        
-        $post_terakhir = Post::orderBy('created_at', 'desc')->limit(5)->get();
-        $organisasi = Organisasi::orderBy('created_at', 'desc')->limit(5)->get();
-        return view('home', ['data'=>$data, 'post_terakhir'=>$post_terakhir, 'data_organisasi'=>$organisasi]);
+            $post_terakhir = Post::orderBy('created_at', 'desc')->limit(5)->get();
+            $organisasi = Organisasi::orderBy('created_at', 'desc')->limit(5)->get();
+            return view('home', ['data'=>$data, 'post_terakhir'=>$post_terakhir, 'data_organisasi'=>$organisasi]);
+        }
+
+        if(auth('client')->check()){
+
+        }
+
     }
 
     public function index_home()

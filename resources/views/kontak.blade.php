@@ -1,4 +1,4 @@
-@extends('layouts.home_template')
+@extends('1home_template.blade.php.backup')
 
 @section('content')
     <div class="row">
