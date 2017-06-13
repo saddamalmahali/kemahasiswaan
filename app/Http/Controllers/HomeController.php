@@ -22,7 +22,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(auth()->guest()){
+        if(!auth('client')->check() && !auth('web')->check()){
             $user_hima = UserManajemen::where('tipe', '=', 'hima')->count();
             $user_ukm = UserManajemen::where('tipe', '=', 'ukm')->count();
             $total_organisasi = Organisasi::count();
@@ -37,20 +37,29 @@ class HomeController extends Controller
             $post_terakhir = Post::orderBy('created_at', 'desc')->limit(5)->get();
             $organisasi = Organisasi::orderBy('created_at', 'desc')->limit(5)->get();
             return view('home', ['data'=>$data, 'post_terakhir'=>$post_terakhir, 'data_organisasi'=>$organisasi]);
+        }else if(auth('client')->check()){
+            $post_terakhir = Post::where('kategori', '=', auth('client')->user()->bagian)->orderBy('created_at', 'desc')->limit(5)->get();
+            $user = auth('client')->user();
+            return view('client.dasboard', ['post_terakhir'=>$post_terakhir, 'user'=>$user]);
         }
 
-        if(auth('client')->check()){
 
-        }
 
     }
 
     public function index_home()
     {
-        $post_recent = Post::orderBy('created_at')->limit(3)->get();
-        $orgnisasi_recent = Organisasi::orderBy('created_at')->limit(5)->get();
-        $post = Post::limit('2')->get();
-        return view('welcome', ['data_post'=>$post, 'recent_post'=>$post_recent, 'recent_organisasi'=>$orgnisasi_recent]);
+
+        if(!auth('client')->check() && !auth('web')->check()){
+            $post_recent = Post::orderBy('created_at')->limit(3)->get();
+            $orgnisasi_recent = Organisasi::orderBy('created_at')->limit(5)->get();
+            $post = Post::limit('2')->get();
+            return view('welcome', ['data_post'=>$post, 'recent_post'=>$post_recent, 'recent_organisasi'=>$orgnisasi_recent]);
+        }else if(auth('client')->check()){
+            $post_terakhir = Post::where('kategori', '=', auth('client')->user()->bagian)->orderBy('created_at', 'desc')->limit(5)->get();
+            $user = auth('client')->user();
+            return view('client.dasboard', ['post_terakhir'=>$post_terakhir, 'user'=>$user]);
+        }
     }
 
     public function view_post($id)

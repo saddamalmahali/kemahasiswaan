@@ -15,6 +15,7 @@
 
     <!-- Theme skin -->
     <link href="{{url('skins/default.css')}}" rel="stylesheet" />
+    @yield('css')
 
     <!-- =======================================================
         Theme Name: Moderna
@@ -40,19 +41,20 @@
                 </div>
                 <div class="navbar-collapse collapse ">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="{{url('/')}}">Home</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Organisasi <b class=" icon-angle-down"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{{url('/')}}">Typography</a></li>
-                                <li><a href="{{url('/')}}">Components</a></li>
-                                <li><a href="{{url('/')}}">Pricing box</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="{{url('/')}}">Portfolio</a></li>
-                        <li><a href="{{url('/')}}">Blog</a></li>
-                        <li><a href="{{url('/')}}">Contact</a></li>
+
+
                         @if(!auth('client')->check() && !auth('web')->check())
+                            <li class="active"><a href="{{url('/')}}">Home</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Organisasi <b class=" icon-angle-down"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{url('/')}}">Typography</a></li>
+                                    <li><a href="{{url('/')}}">Components</a></li>
+                                    <li><a href="{{url('/')}}">Pricing box</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="{{url('/')}}">Portfolio</a></li>
+                            <li><a href="{{url('/')}}">Contact</a></li>
                             <li>
                                 <a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false"><i class="fa fa-key"></i> &nbsp;Login <b class=" icon-angle-down"></b></a>
                                 <ul class="dropdown-menu">
@@ -60,8 +62,22 @@
                                     <li><a href="{{url('/login_hima')}}">Login Organisasi</a></li>
                                 </ul>
                             </li>
-                        @else
-                            <li><a href="#">Sudah Login</a></li>
+                        @elseif(auth('client')->check())
+                            <li class="{{url()->full()==url('/') ? 'active' : ''}}"><a href="{{url('/')}}">Dasboard</a></li>
+                            <li class="{{url()->full()==url('/list_kegiatan') ? 'active' : ''}}"><a href="{{url('/list_kegiatan')}}"><i class="fa fa-archive"></i>&nbsp; Kegiatan</a></li>
+                            <li>
+                                <a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false"><i class="fa fa-user"></i>&nbsp{{auth('client')->user()->nama}}</a>
+                                <ul class="dropdown-menu bg-primary">
+                                    <li>
+                                        <a href="{{url('/logout')}}" onclick="
+                                            event.preventDefault();
+                                            document.getElementById('form-logout').submit()"><i class="fa fa-sign-out"></i>&nbsp; &nbsp;Logout</a>
+                                        <form id="form-logout" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
                         @endif
                     </ul>
                 </div>
@@ -70,161 +86,76 @@
     </header>
     <!-- end header -->
 
-    <section class="callaction">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="big-cta">
-                        <div class="cta-text">
-                            <h2><span>Moderna</span> HTML Business Template</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     <section id="content">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
+            @if(!auth('client')->check() && !auth('web')->check())
+
+                @yield('content')
+            @endif
+
+            @if(auth('client')->check())
                     <div class="row">
-                        <div class="col-lg-3">
-                            <div class="box">
-                                <div class="box-gray aligncenter">
-                                    <h4>Fully responsive</h4>
-                                    <div class="icon">
-                                        <i class="fa fa-desktop fa-3x"></i>
-                                    </div>
-                                    <p>
-                                        Voluptatem accusantium doloremque laudantium sprea totam rem aperiam.
-                                    </p>
-
-                                </div>
-                                <div class="box-bottom">
-                                    <a href="#">Learn more</a>
-                                </div>
-                            </div>
+                        <div class="col-lg-8">
+                            @yield('content')
                         </div>
-                        <div class="col-lg-3">
-                            <div class="box">
-                                <div class="box-gray aligncenter">
-                                    <h4>Modern Style</h4>
-                                    <div class="icon">
-                                        <i class="fa fa-pagelines fa-3x"></i>
-                                    </div>
-                                    <p>
-                                        Voluptatem accusantium doloremque laudantium sprea totam rem aperiam.
-                                    </p>
-
+                        <div class="col-lg-4">
+                            <aside class="right-sidebar">
+                                <div class="widget">
+                                    <form class="form-search">
+                                        <input class="form-control" type="text" placeholder="Search..">
+                                    </form>
                                 </div>
-                                <div class="box-bottom">
-                                    <a href="#">Learn more</a>
+                                <div class="widget">
+                                    <h5 class="widgetheading">Categories</h5>
+                                    <ul class="cat">
+                                        <li><i class="icon-angle-right"></i><a href="#">Web design</a><span> (20)</span></li>
+                                        <li><i class="icon-angle-right"></i><a href="#">Online business</a><span> (11)</span></li>
+                                        <li><i class="icon-angle-right"></i><a href="#">Marketing strategy</a><span> (9)</span></li>
+                                        <li><i class="icon-angle-right"></i><a href="#">Technology</a><span> (12)</span></li>
+                                        <li><i class="icon-angle-right"></i><a href="#">About finance</a><span> (18)</span></li>
+                                    </ul>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="box">
-                                <div class="box-gray aligncenter">
-                                    <h4>Customizable</h4>
-                                    <div class="icon">
-                                        <i class="fa fa-edit fa-3x"></i>
-                                    </div>
-                                    <p>
-                                        Voluptatem accusantium doloremque laudantium sprea totam rem aperiam.
-                                    </p>
-
+                                <div class="widget">
+                                    <h5 class="widgetheading">Latest posts</h5>
+                                    <ul class="recent">
+                                        <li>
+                                            <img src="{{url('img/dummies/blog/65x65/thumb1.jpg')}}" class="pull-left" alt="" />
+                                            <h6><a href="#">Lorem ipsum dolor sit</a></h6>
+                                            <p>
+                                                Mazim alienum appellantur eu cu ullum officiis pro pri
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <a href="#"><img src="{{url('img/dummies/blog/65x65/thumb2.jpg')}}" class="pull-left" alt="" /></a>
+                                            <h6><a href="#">Maiorum ponderum eum</a></h6>
+                                            <p>
+                                                Mazim alienum appellantur eu cu ullum officiis pro pri
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <a href="#"><img src="{{url('img/dummies/blog/65x65/thumb3.jpg')}}" class="pull-left" alt="" /></a>
+                                            <h6><a href="#">Et mei iusto dolorum</a></h6>
+                                            <p>
+                                                Mazim alienum appellantur eu cu ullum officiis pro pri
+                                            </p>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <div class="box-bottom">
-                                    <a href="#">Learn more</a>
+                                <div class="widget">
+                                    <h5 class="widgetheading">Popular tags</h5>
+                                    <ul class="tags">
+                                        <li><a href="#">Web design</a></li>
+                                        <li><a href="#">Trends</a></li>
+                                        <li><a href="#">Technology</a></li>
+                                        <li><a href="#">Internet</a></li>
+                                        <li><a href="#">Tutorial</a></li>
+                                        <li><a href="#">Development</a></li>
+                                    </ul>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="box">
-                                <div class="box-gray aligncenter">
-                                    <h4>Valid HTML5</h4>
-                                    <div class="icon">
-                                        <i class="fa fa-code fa-3x"></i>
-                                    </div>
-                                    <p>
-                                        Voluptatem accusantium doloremque laudantium sprea totam rem aperiam.
-                                    </p>
-
-                                </div>
-                                <div class="box-bottom">
-                                    <a href="#">Learn more</a>
-                                </div>
-                            </div>
+                            </aside>
                         </div>
                     </div>
-                </div>
-            </div>
-            <!-- divider -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="solidline">
-                    </div>
-                </div>
-            </div>
-            <!-- end divider -->
-            <!-- Portfolio Projects -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <h4 class="heading">Recent Works</h4>
-                    <div class="row">
-                        <section id="projects">
-                            <ul id="thumbs" class="portfolio">
-                                <!-- Item Project and Filter Name -->
-                                <li class="col-lg-3 design" data-id="id-0" data-type="web">
-                                    <div class="item-thumbs">
-                                        <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                                        <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Work 1" href="img/works/1.jpg">
-                                            <span class="overlay-img"></span>
-                                            <span class="overlay-img-thumb font-icon-plus"></span>
-                                        </a>
-                                        <!-- Thumb Image and Description -->
-                                        <img src="img/works/1.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-                                    </div>
-                                </li>
-                                <!-- End Item Project -->
-                                <!-- Item Project and Filter Name -->
-                                <li class="item-thumbs col-lg-3 design" data-id="id-1" data-type="icon">
-                                    <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Work 2" href="img/works/2.jpg">
-                                        <span class="overlay-img"></span>
-                                        <span class="overlay-img-thumb font-icon-plus"></span>
-                                    </a>
-                                    <!-- Thumb Image and Description -->
-                                    <img src="img/works/2.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-                                </li>
-                                <!-- End Item Project -->
-                                <!-- Item Project and Filter Name -->
-                                <li class="item-thumbs col-lg-3 photography" data-id="id-2" data-type="illustrator">
-                                    <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Work 3" href="img/works/3.jpg">
-                                        <span class="overlay-img"></span>
-                                        <span class="overlay-img-thumb font-icon-plus"></span>
-                                    </a>
-                                    <!-- Thumb Image and Description -->
-                                    <img src="img/works/3.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-                                </li>
-                                <!-- End Item Project -->
-                                <!-- Item Project and Filter Name -->
-                                <li class="item-thumbs col-lg-3 photography" data-id="id-2" data-type="illustrator">
-                                    <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Work 4" href="img/works/4.jpg">
-                                        <span class="overlay-img"></span>
-                                        <span class="overlay-img-thumb font-icon-plus"></span>
-                                    </a>
-                                    <!-- Thumb Image and Description -->
-                                    <img src="img/works/4.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-                                </li>
-                                <!-- End Item Project -->
-                            </ul>
-                        </section>
-                    </div>
-                </div>
-            </div>
+            @endif
 
         </div>
     </section>
@@ -313,17 +244,17 @@
 <!-- javascript
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="js/jquery.js"></script>
-<script src="js/jquery.easing.1.3.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.fancybox.pack.js"></script>
-<script src="js/jquery.fancybox-media.js"></script>
-<script src="js/google-code-prettify/prettify.js"></script>
-<script src="js/portfolio/jquery.quicksand.js"></script>
-<script src="js/portfolio/setting.js"></script>
-<script src="js/jquery.flexslider.js"></script>
-<script src="js/animate.js"></script>
-<script src="js/custom.js"></script>
-
+<script src="{{url('js/jquery.js')}}"></script>
+<script src="{{url('js/jquery.easing.1.3.js')}}"></script>
+<script src="{{url('js/bootstrap.min.js')}}"></script>
+<script src="{{url('js/jquery.fancybox.pack.js')}}"></script>
+<script src="{{url('js/jquery.fancybox-media.js')}}"></script>
+<script src="{{url('js/google-code-prettify/prettify.js')}}"></script>
+<script src="{{url('js/portfolio/jquery.quicksand.js')}}"></script>
+<script src="{{url('js/portfolio/setting.js')}}"></script>
+<script src="{{url('js/jquery.flexslider.js')}}"></script>
+<script src="{{url('js/animate.js')}}"></script>
+<script src="{{url('js/custom.js')}}"></script>
+@yield('script')
 </body>
 </html>
