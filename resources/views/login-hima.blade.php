@@ -15,17 +15,11 @@
 
     <!-- Bootstrap core CSS -->
     <!-- Bootstrap core CSS -->
-    <link href="{{url('bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{url('css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{url('css/patros.css')}}" rel="stylesheet">
+    <link href="{{url('font-awesome/css/font-awesome.css')}}" rel="stylesheet">
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="{{url('css/ie10-viewport-bug-workaround.css')}}" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="{{url('css/signin.css')}}" rel="stylesheet">
-
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="{{url('js/ie-emulation-modes-warning.js')}}"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -38,38 +32,61 @@
 
     <div class="container">
 
-      <form class="form-signin" action="{{url('/login_hima')}}" method="POST">
-        {{ csrf_field() }}
-        <div align="center"><img src="{{url('img/logo.png')}}" width="100" height="100"></div>
-        <h2 class="form-signin-heading" align="center"><b>Kemahasiswaan </b><p><small>Sistem Informasi Kemahasiswaan</small></p> </h2> <br />
-        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-          <label for="inputEmail" class="sr-only">Email address</label>
-          <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required autofocus>
-          @if ($errors->has('email'))
-              <span class="help-block">
+      <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h4 class="panel-title"><span class="fa fa-key"></span>&nbsp;&nbsp;LOGIN APLIKASI</h4>
+            </div>
+            <div class="panel-body">
+              <form class="inline" action="{{url('/login_hima')}}" method="POST">
+                {{ csrf_field() }}
+                <div align="center"><img src="{{url('img/logo.png')}}" width="100" height="100"></div>
+                <h2 class="form-signin-heading" align="center"><b>Kemahasiswaan </b><p><small>Sistem Informasi Kemahasiswaan</small></p> </h2> <br />
+                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                  <label for="inputEmail" class="sr-only">Email address</label>
+                  <input type="email" id="inputEmail" name="email" class="form-control custom-labels" placeholder="Email address" required autofocus>
+                  @if ($errors->has('email'))
+                    <span class="help-block">
                   <strong>{{ $errors->first('email') }}</strong>
               </span>
-          @endif
-        </div>
-        
-        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-          <label for="inputPassword" class="sr-only">Password</label>
-          <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
-          @if ($errors->has('password'))
-              <span class="help-block">
+                  @endif
+                </div>
+
+                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                  <label for="inputPassword" class="sr-only">Password</label>
+                  <input type="password" id="inputPassword" name="password" class="form-control custom-labels inverse" placeholder="Password" required>
+                  @if ($errors->has('password'))
+                    <span class="help-block">
                   <strong>{{ $errors->first('password') }}</strong>
               </span>
-          @endif
+                  @endif
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                  </label>
+                </div>
+                <button class="btn btn-md btn-custom btn-noborder-radius" type="submit">Sign in</button>
+              </form>
+            </div>
+          </div>
         </div>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      </form>
+      </div>
 
     </div> <!-- /container -->
+    <style>
+      .container {
+        padding-top: 25px;
+      }
+      .panel .panel-heading{
+        background: #E96840 !important;
+        border-color: #E96840 !important;
+      }
+      .panel {
+        border-color: #E96840 !important;
+      }
+    </style>
 
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->

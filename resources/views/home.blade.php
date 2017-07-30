@@ -55,7 +55,7 @@
                     <h3>Organisasi</h3>
                     <div class="row">
                         <div class="col-md-4">
-                            <h3>{{$data['total_organisasi']}} <p><small>total</small></small></h3>
+                            <h3>{{$data['total_organisasi']}}</h3>
                         </div>
                         <div class="col-md-8">
                             <div class="pull-right" style="padding:0; margin:0;width : 50px; heigth : 50px;">
